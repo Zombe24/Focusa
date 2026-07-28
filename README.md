@@ -19,6 +19,7 @@ Focusa interface
 </p>
 
 ---
+Focusa interface
 
 <p align="left">
   <img src="Focusa/assets/img2.png" alt="Focusa Extension Interface" width="40%">
