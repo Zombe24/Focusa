@@ -11,5 +11,12 @@ Since **Focusa** is an open-source extension, you can easily load it into any Ch
 4. Toggle **Developer mode** on (found in the top-right corner on Chrome, or bottom-left on Edge).
 5. Click **Load unpacked** (or **Load unpacked extension**).
 6. Select the extracted `Focusa` folder. Done!
+---
+Focusa interface
 ![Focusa Interface](Focusa/assets/img1.png)
+---
+![Focusa Interface](Focusa/assets/img2.png)
+---
+I hope you enjoy this extension and that it helps you achieve all your goals.
+
 
