@@ -13,6 +13,7 @@ Since **Focusa** is an open-source extension, you can easily load it into any Ch
 6. Select the extracted `Focusa` folder. Done!
 ---
 Focusa interface
+
 <p align="left">
   <img src="Focusa/assets/img1.png" alt="Focusa Extension Interface" width="60%">
 </p>
