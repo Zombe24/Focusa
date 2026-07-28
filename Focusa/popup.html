@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    :root {
+      --bg-color: #f2f2f7;
+      --glass-bg: rgba(255, 255, 255, 0.75);
+      --glass-border: rgba(255, 255, 255, 0.4);
+      --glass-border-top: rgba(255, 255, 255, 0.9);
+      --text-main: #1c1c1e;
+      --text-muted: #8e8e93;
+      --input-bg: rgba(255, 255, 255, 0.6);
+      --input-border: rgba(0, 0, 0, 0.08);
+      --accent-green: #34c759;
+      --accent-blue: #007aff;
+      --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+      --border-line: rgba(0, 0, 0, 0.05);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #1c1c1e;
+        --glass-bg: rgba(255, 255, 255, 0.08);
+        --glass-border: rgba(255, 255, 255, 0.12);
+        --glass-border-top: rgba(255, 255, 255, 0.22);
+        --text-main: #ffffff;
+        --text-muted: #98989d;
+        --input-bg: rgba(0, 0, 0, 0.25);
+        --input-border: rgba(255, 255, 255, 0.1);
+        --accent-green: #30d158;
+        --accent-blue: #0a84ff;
+        --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        --border-line: rgba(255, 255, 255, 0.08);
+      }
+    }
+
+    body {
+      width: 310px;
+      margin: 0;
+      padding: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg-color);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      box-sizing: border-box;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    /* Header Container for Logo + Title */
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .header-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: contain;
+    }
+
+    .header-container h3 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 650;
+      text-align: center;
+      letter-spacing: -0.2px;
+      color: var(--text-main);
+    }
+
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      border-top: 1px solid var(--glass-border-top);
+      border-radius: 16px;
+      padding: 14px;
+      margin-bottom: 10px;
+      box-shadow: var(--card-shadow);
+      transition: background 0.3s ease, border 0.3s ease;
+    }
+
+    .flex-space {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .label {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-main);
+      display: block;
+      padding-left: 2px;
+      margin-bottom: 6px;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 42px;
+      height: 24px;
+    }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(120, 120, 128, 0.32);
+      transition: .25s ease;
+      border-radius: 24px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .25s ease;
+      border-radius: 50%;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    input:checked + .slider { background-color: var(--accent-green); }
+    input:checked + .slider:before { transform: translateX(18px); }
+
+    .timer-container {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .timer-input {
+      width: 65px !important;
+      text-align: center;
+      margin-top: 0 !important;
+    }
+
+    .unit-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .time-left-badge {
+      font-size: 12px;
+      font-weight: 500;
+      color: #ff9500;
+      margin-left: auto;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .time-left-badge {
+        color: #ff9f0a;
+      }
+    }
+
+    textarea, input[type="text"], input[type="number"] {
+      width: 100%;
+      box-sizing: border-box;
+      border: 1px solid var(--input-border);
+      border-radius: 10px;
+      padding: 8px 10px;
+      font-size: 13px;
+      font-family: inherit;
+      background: var(--input-bg);
+      color: var(--text-main);
+      transition: all 0.2s ease;
+      resize: none;
+    }
+    
+    input[type="number"]::-webkit-inner-spin-button, 
+    input[type="number"]::-webkit-outer-spin-button { 
+      -webkit-appearance: none; 
+      margin: 0; 
+    }
+
+    textarea::placeholder, input::placeholder {
+      color: var(--text-muted);
+    }
+    textarea:focus, input:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.25);
+    }
+
+    .btn {
+      background: var(--accent-blue);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+    .btn:hover { opacity: 0.88; }
+
+    /* Active Timer Button (Apple System Orange) */
+    .btn.active {
+      background: #ff9500;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .btn.active {
+        background: #ff9f0a;
+      }
+    }
+
+    .site-list {
+      max-height: 100px;
+      overflow-y: auto;
+      margin-top: 8px;
+    }
+    .site-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 2px;
+      font-size: 13px;
+      color: var(--text-main);
+      border-bottom: 1px solid var(--border-line);
+    }
+    .site-item:last-child { border-bottom: none; }
+
+    .delete-btn {
+      color: #ff453a;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 500;
+      background: none;
+      border: none;
+      padding: 0;
+      opacity: 0.85;
+    }
+    .delete-btn:hover { opacity: 1; }
+  </style>
+</head>
+<body>
+
+  <!-- Header with Icon on the Left -->
+  <div class="header-container">
+    <img src="icons/icon128.png" alt="Focusa Logo" class="header-logo">
+    <h3>Focusa</h3>
+  </div>
+
+  <!-- Toggle Card -->
+  <div class="glass-card flex-space">
+    <span class="label" id="statusLabel" style="margin-bottom: 0;">Focus mode</span>
+    <label class="switch">
+      <input type="checkbox" id="focusToggle">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <!-- Custom Timer Card -->
+  <div class="glass-card">
+    <div class="flex-space" style="margin-bottom: 6px;">
+      <span class="label" style="margin-bottom: 0;">Set timer</span>
+      <span id="timeLeftBadge" class="time-left-badge"></span>
+    </div>
+    <div class="timer-container">
+      <input type="number" id="customTimerInput" class="timer-input" placeholder="25" min="1" max="1440">
+      <span class="unit-text">mins</span>
+      <button class="btn" id="startTimerBtn" style="margin-left: auto;">Start</button>
+    </div>
+  </div>
+
+  <!-- Note Card -->
+  <div class="glass-card">
+    <span class="label">Personal note</span>
+    <textarea id="noteInput" rows="2" placeholder="e.g., Stay focused."></textarea>
+  </div>
+
+  <!-- Blocked Websites Card -->
+  <div class="glass-card">
+    <span class="label">Blocked websites</span>
+    <div style="display: flex; gap: 8px; align-items: center;">
+      <input type="text" id="siteInput" placeholder="example.com">
+      <button class="btn" id="addSiteBtn">Add</button>
+    </div>
+    <div class="site-list" id="siteListContainer"></div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

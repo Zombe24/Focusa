@@ -1,0 +1,50 @@
+{
+  "manifest_version": 3,
+  "name": "Focusa",
+  "version": "1.0",
+  "description": "Minimalist focus and website blocker extension.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "alarms",
+    "tabs"
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "Command+Shift+F"
+      },
+      "description": "Open Focusa Menu"
+    }
+  },
+    "web_accessible_resources": [
+    {
+      "resources": ["icons/icon128.png", "icons/icon48.png"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
