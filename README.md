@@ -16,11 +16,15 @@ Focusa interface
 <p align="left">
   <img src="Focusa/assets/img1.png" alt="Focusa Extension Interface" width="60%">
 </p>
+
 ---
+
 <p align="left">
   <img src="Focusa/assets/img2.png" alt="Focusa Extension Interface" width="40%">
 </p>
+
 ---
+
 I hope you enjoy this extension and that it helps you achieve all your goals.
 
 
